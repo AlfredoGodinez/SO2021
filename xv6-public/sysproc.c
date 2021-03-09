@@ -89,3 +89,10 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//Llamada a sistema apagar la computadora
+
+int sys_shutdown(void){
+	outw(0x604, 0x2000);
+		return 0;
+}
