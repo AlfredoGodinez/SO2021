@@ -20,13 +20,16 @@ main(void)
   dup(0);  // stderr
 
   for(;;){
-    printf(1, "init: starting sh\n");
+    printf(1, "supercalifragilistico\n");
     pid = fork();
     if(pid < 0){
       printf(1, "init: fork failed\n");
       exit();
     }
     if(pid == 0){
+		//1) Cuando cambio ls imprime el directorio infinitas veces
+		//2) Cuando cambi No existe pregrama sale init:  exec sh failed infinitas veces
+		//3) Cuando cambio el mensaje de arranque lo imprime al terminar
       exec("sh", argv);
       printf(1, "init: exec sh failed\n");
       exit();
