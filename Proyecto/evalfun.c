@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <signal.h>
 #include<sys/wait.h>
+#include <stdlib.h>
 
 int entrada=1;
 void signalHandler(int sig){
 	entrada=0;
 	printf(" recibi señal %d\n", sig);
+    exit(-1);
 }
 int main(){
     char fun[100];
@@ -39,7 +41,6 @@ int main(){
 		close(pc2p[1]);
 		FILE *out = fdopen(pp2c[1], "w");
 		FILE *in = fdopen(pc2p[0], "r");
-		
 		while(entrada){
 			scanf("%s",fun);
 			scanf("%f %f %f", &inicio, &fin, &divisor);
@@ -55,9 +56,11 @@ int main(){
 			}
 			 promedio=suma/divisor;
             printf("%f\n",promedio);
+           
 		}
+       
 		printf("voy a terminar \n");
-        signal(2,signalHandler);	
+        	
 	}
 	return 0;
 }
